@@ -11,24 +11,40 @@ DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
 @app.route('/')
-@app.route('/MonthlyBill')
+@app.route('/MonthlyBill/')
 def getMonthlyBills():
     bills = session.query(MonthlyBill).all()
-    for i in bills:
-        print(i.bill)
     return render_template('monthlyBills.html', bills=bills)
 
-@app.route('/MonthlyBill/new')
+@app.route('/MonthlyBill/new',methods=['GET','POST'])
 def newMonthlyBills():
-    # newMonthlyBill = 
-    # return render_template('monthlyBills.html', bills=bills)
-    return 'Add Monthly Bill'
+    if request.method == 'POST':
+        newMonthlyBill = MonthlyBill(
+        bill = request.form['bill'],
+        cost = request.form['cost'],
+        date = request.form['date'],
+        UserID = request.form['UserID'],
+        )
+        session.add(newMonthlyBill)
+        session.commit()
+        return redirect(url_for('getMonthlyBills'))
+    else:
+        return render_template('addMonthlyBill.html')
+
 
 @app.route('/MonthlyBill/<int:mbid>/edit')
 def editMonthlyBills(mbid):
+    editBill = session.query(MonthlyBill).filter_by(id =mbid).one()
     # newMonthlyBill = 
     # return render_template('monthlyBills.html', bills=bills)
-    return 'Edit Monthly Bill'
+    return render_template('editMonthlyBill.html', editBill = editBill)
+
+@app.route('/MonthlyBill/<int:mbid>/delete')
+def deleteMonthlyBills(mbid):
+    deleteBill = session.query(MonthlyBill).filter_by(id =mbid).one()
+    # newMonthlyBill = 
+    # return render_template('monthlyBills.html', bills=bills)
+    return render_template('deleteMonthlyBill.html', deleteBill = deleteBill)
 
 
 if __name__ == '__main__':  # ensure function only runs if executed from the python interpreter

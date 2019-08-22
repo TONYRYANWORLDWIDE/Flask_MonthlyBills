@@ -30,9 +30,7 @@
 
     <td>
         <a class="alter" href = '{{url_for('editMonthlyBills', mbid = b.id)}}'>Edit</a>
-        <a class="alter">Update</a>
-        <a class="alter">Cancel</a>
-        <a class="alter">Delete</a>
+        <a class="alter" href = '{{url_for('deleteMonthlyBills', mbid = b.id)}}'>Delete</a>
 
     </td>
 </tr>

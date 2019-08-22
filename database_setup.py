@@ -14,7 +14,7 @@ class MonthlyBill(Base):
     bill = Column(String(80), nullable = False)
     cost = Column(Float)
     date = Column(String(2))
-    UserID = Column(String(128), nullable = False)
+    UserID = Column(String(128))
     
 class WeeklyBill(Base):
     __tablename__ = 'weeklyBills'
