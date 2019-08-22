@@ -32,19 +32,33 @@ def newMonthlyBills():
         return render_template('addMonthlyBill.html')
 
 
-@app.route('/MonthlyBill/<int:mbid>/edit')
+@app.route('/MonthlyBill/<int:mbid>/edit', methods=['GET','POST'])
 def editMonthlyBills(mbid):
     editBill = session.query(MonthlyBill).filter_by(id =mbid).one()
-    # newMonthlyBill = 
-    # return render_template('monthlyBills.html', bills=bills)
-    return render_template('editMonthlyBill.html', editBill = editBill)
+    if request.method == 'POST':
+        if request.form['bill']:
+            editBill.bill = request.form['bill']
+        if request.form['cost']:
+            editBill.cost = request.form['cost']
+        if request.form['date']:
+            editBill.date = request.form['date']
+        if request.form['UserID']:
+            editBill.UserID = request.form['UserID']
+        session.add(editBill)
+        session.commit()
+        return redirect(url_for('getMonthlyBills'))
+    else:
+        return render_template('editMonthlyBill.html', mbid = mbid, item = editBill)
 
-@app.route('/MonthlyBill/<int:mbid>/delete')
+@app.route('/MonthlyBill/<int:mbid>/delete',methods=['GET','POST'])
 def deleteMonthlyBills(mbid):
-    deleteBill = session.query(MonthlyBill).filter_by(id =mbid).one()
-    # newMonthlyBill = 
-    # return render_template('monthlyBills.html', bills=bills)
-    return render_template('deleteMonthlyBill.html', deleteBill = deleteBill)
+    deleteBill = session.query(MonthlyBill).filter_by(id = mbid).one()
+    if request.method == 'POST':
+        session.delete(deleteBill)
+        session.commit()
+        return redirect(url_for('getMonthlyBills'))
+    else:    
+        return render_template('deleteMonthlyBill.html', mbid = mbid, item = deleteBill)
 
 
 if __name__ == '__main__':  # ensure function only runs if executed from the python interpreter
