@@ -52,8 +52,6 @@ def deleteBankBalance(mbid):
     else:    
         return render_template('deleteBankBalance.html', mbid = mbid, item = deleteBalance)
 
-
-
 @app.route('/MonthlyBill/')
 def getMonthlyBills():
     bills = session.query(MonthlyBill).all()
@@ -73,7 +71,6 @@ def newMonthlyBills():
         return redirect(url_for('getMonthlyBills'))
     else:
         return render_template('addMonthlyBill.html')
-
 
 @app.route('/MonthlyBill/<int:mbid>/edit', methods=['GET','POST'])
 def editMonthlyBills(mbid):
@@ -103,9 +100,6 @@ def deleteMonthlyBills(mbid):
     else:    
         return render_template('deleteMonthlyBill.html', mbid = mbid, item = deleteBill)
 
-
-
-
 @app.route('/WeeklyBill/')
 def getWeeklyBills():
     bills = session.query(WeeklyBill).all()
@@ -125,9 +119,6 @@ def newWeeklyBills():
         return redirect(url_for('getWeeklyBills'))
     else:
         return render_template('addWeeklyBill.html')
-
-
-
 
 @app.route('/WeeklyBill/<int:mbid>/edit', methods=['GET','POST'])
 def editWeeklyBills(mbid):
@@ -156,7 +147,6 @@ def deleteWeeklyBills(mbid):
         return redirect(url_for('getWeeklyBills'))
     else:    
         return render_template('deleteWeeklyBill.html', mbid = mbid, item = deleteBill)
-
 
 if __name__ == '__main__':  # ensure function only runs if executed from the python interpreter
     app.secret_key = 'super_secret_key2'
