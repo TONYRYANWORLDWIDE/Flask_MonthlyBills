@@ -118,7 +118,7 @@ def newMonthlyBills():
         bill = request.form['bill'],
         cost = request.form['cost'],
         date = request.form['date'],
-        UserID = request.form['UserID'],
+        UserID = 'a5ca7194-40f8-4d8e-81ed-d56e7338317f'
         )
         session.add(newMonthlyBill)
         session.commit()
@@ -136,8 +136,7 @@ def editMonthlyBills(mbid):
             editBill.cost = request.form['cost']
         if request.form['date']:
             editBill.date = request.form['date']
-        if request.form['UserID']:
-            editBill.UserID = request.form['UserID']
+        editBill.UserID = 'a5ca7194-40f8-4d8e-81ed-d56e7338317f'
         session.add(editBill)
         session.commit()
         return redirect(url_for('getMonthlyBills'))
