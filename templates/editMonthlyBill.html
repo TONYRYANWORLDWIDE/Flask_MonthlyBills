@@ -6,11 +6,11 @@
         <h1>Edit {{item.bill}}</h1>
         <form action = "{{url_for('editMonthlyBills', mbid = item.id)}}" method = 'POST'>            
             <p>bill:</p>
-            <input type = 'text' size = '30' name = 'bill', placeholder = "Bill Name">
+            <input type = 'text' size = '30' name = 'bill', placeholder = "{{item.bill}}">
             <p>cost:</p>
-            <input type = 'text' size = '30' name = 'cost' placeholder = "Cost">
+            <input type = 'text' size = '30' name = 'cost' placeholder = "{{item.cost}}">
             <p>date:</p>
-            <input type = 'text' size = '30' name = 'date' placeholder = "Day Of Month">
+            <input type = 'text' size = '30' name = 'date' placeholder = "{{item.date}}">
             <p>UserID</p>
             <input type = 'text' size = '30' name = 'UserID' value = "a5ca7194-40f8-4d8e-81ed-d56e7338317f">
             <input type = 'submit' value = 'Edit'>

@@ -1,19 +1,26 @@
 #tblMonthlyBills{
     border-collapse: collapse;
 
-    border: 5px solid black;
+
+
 }
 table{
     width: 100%;
-
 }
-th,
-td,
+th{
+    border: 5px solid black;
+}
+td{
+    border: 5px solid black;
+}
 .trbold{
     border: 5px solid black;
     color: white;   
+    width: 20%;
+    font-size: 1.2em;
+    padding-top: 10px;
+    padding-left: 5px;
 }
-
 
 body {
     font-family: sans-serif;
@@ -32,15 +39,12 @@ h2 {
     font-family: 'georgia', serif;
     margin: 0;
 }
-
 h1 {
     border-bottom: 2px solid #eee;
 }
-
 h2 {
     font-size: 1.2em;
 }
-
 dd,
 dt {
     color: #cccccc;
@@ -48,14 +52,7 @@ dt {
 tr{
     padding: 5px;
 }
-.restaurant{
-    border: 2px solid;
-    color: white;
-    border-radius: 25px;
-    border-color: #ffffff73;
-    padding: 10px;
-    font-size: 1.2em;
-}
+
 .item{
     border: 2px solid;
     border-radius: 10px;
@@ -91,14 +88,9 @@ a.new {
     text-align: center;
 }
 
-.name {
-    width: 20%;
-    display: inline-block;
-    font-size: 1.2em;
-    padding-top: 10px;
-    padding-left: 5px;
-    color: white;
-}
+
+
+
 
 .description {
     font-size: .85 em;  

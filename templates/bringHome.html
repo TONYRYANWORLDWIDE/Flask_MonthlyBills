@@ -5,7 +5,7 @@
         <h1>Bring Home Pay</h1>
         <a href="{{url_for('newBringHome')}}">New BringHome</a>
         </div>
-<table id="tblMonthlyBills" class="table ">
+<table id="tblMonthlyBills" class="table">
     <tr class="trbold">
         <th>Name</th>
         <th>Amount</th>
@@ -32,7 +32,6 @@
         <a class="alter" href = "{{url_for('deleteBringHome', mbid = b.id)}}">Delete</a>
     </td>
 </tr>
-
 {% endfor %}
 </table>
 </div>
