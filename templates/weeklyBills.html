@@ -1,9 +1,5 @@
-<html>
-<head>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-</head>
-
-<body>
+{% extends "layout.html" %}
+{% block content %}
 <div class = 'pane'>
         <div class = 'header'>
         <h1>Weekly Bills</h1>
@@ -38,5 +34,4 @@
 {% endfor %}
 </table>
 </div>
-</body>
-</html>
+{% endblock %}
