@@ -10,11 +10,64 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
-@app.route('/')
+
+
+
+@app.route('/BringHome/')
+def getBringHomePay():
+    bringhome = session.query(BringHome).all()
+    return render_template('bringHome.html', bringhome=bringhome)
+
+@app.route('/BringHome/new', methods=['GET','POST'])
+def newBringHome():
+    if request.method == 'POST':
+        newBringHome = BringHome(
+            name = request.form['name'],
+            amount = request.form ['amount'],
+            dayOfWeek = request.form ['dayOfWeek'],
+            Frequency = request.form['Frequency'],
+            UserID = 'a5ca7194-40f8-4d8e-81ed-d56e7338317f'
+        )
+        session.add(newBringHome)
+        session.commit()
+        return redirect(url_for('getBringHomePay'))
+    else:
+        return render_template('addBringHome.html')
+
+
+@app.route('/BringHome/<int:mbid>/edit',methods=['GET','POST'])
+def editBringHome(mbid):
+    editpay = session.query(BringHome).filter_by(id = mbid).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            editpay.name = request.form['name']
+        if request.form['amount']:
+            editpay.amount = request.form['amount']
+        if request.form['dayOfWeek']:
+            editpay.dayOfWeek = request.form['dayOfWeek']
+        if request.form['Frequency']:
+            editpay.Frequency = request.form['Frequency']
+        session.add(editpay)
+        session.commit()
+        return redirect(url_for('getBringHomePay'))
+    else:
+        return render_template('editBringHome.html', mbid = mbid, item = editpay)
+
+@app.route('/BringHome/<int:mbid>/delete',methods = ['GET','POST'])
+def deleteBringHome(mbid):
+    deleteBringHome = session.query(BringHome).filter_by(id = mbid).one()
+    if request.method == 'POST':
+        session.delete(deleteBringHome)
+        session.commit()
+        return redirect(url_for('getBringHomePay'))
+    else:
+        return render_template('deleteBringHome.html', mbid = mbid, item = deleteBringHome)
+            
 @app.route('/BankBalance/')
 def getBankBalance():
     balances = session.query(BankBalance).all()
     return render_template('bankBalances.html', balances=balances)
+
 
 @app.route('/BankBalance/new',methods=['GET','POST'])
 def newBankBalance():
@@ -52,6 +105,7 @@ def deleteBankBalance(mbid):
     else:    
         return render_template('deleteBankBalance.html', mbid = mbid, item = deleteBalance)
 
+@app.route('/')
 @app.route('/MonthlyBill/')
 def getMonthlyBills():
     bills = session.query(MonthlyBill).all()
