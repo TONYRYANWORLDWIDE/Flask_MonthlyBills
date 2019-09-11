@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 app = Flask(__name__)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base , MonthlyBill, WeeklyBill,BringHome,BankBalance
+from database_setup import Base , MonthlyBill, WeeklyBill,BringHome,BankBalance , MonthlyBills
 import datetime
 
-engine = create_engine('sqlite:///TRBills.db')
+mb = MonthlyBills()
+engine = mb.connect()
+# engine = create_engine('sqlite:///TRBills.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
