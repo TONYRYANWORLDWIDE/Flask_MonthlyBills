@@ -33,11 +33,9 @@ class MonthlyBills():
             print(params)
             conn = psycopg2.connect(**params)
             enginestart = 'postgresql+psycopg2://' + params['user'] + ':' + params['password'] + '@' + params['host']  + ':5432/' + params['database']
-            print(enginestart)
             engine = create_engine(enginestart)
             return engine
         except(Exception) as error:
-            print('there is an error')
             print(error)
 
 class MonthlyBill(Base):
