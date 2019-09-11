@@ -75,7 +75,4 @@ class BankBalance(Base):
 if __name__ == '__main__':    
     mb = MonthlyBills()
     engine = mb.connect()
-#     engine = create_engine('sqlite:///TRBills.db')
-    Base.metadata.create_all(engine)
-# engine = create_engine('sqlite:///TRBills.db')
     Base.metadata.create_all(engine)
