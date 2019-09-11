@@ -5,9 +5,13 @@
     </head>
     <body>
             {% block content %}{% endblock %}
-            <a href = '{{url_for('getMonthlyBills')}}'>Monthly Bills</a>
-            <a href = '{{url_for('getWeeklyBills')}}'>Weekly Bills</a>
-            <a href = '{{url_for('getBankBalance')}}'>Bank Balance</a>
-            <a href = '{{url_for('getBringHomePay')}}'>Bring Home Pay</a>
+            <div class="pane2">
+                <table>
+                    <td><a href = '{{url_for('getMonthlyBills')}}'>Monthly Bills</a></td>
+                    <td><a href = '{{url_for('getWeeklyBills')}}'>Weekly Bills</a></td>
+                    <td><a href = '{{url_for('getBankBalance')}}'>Bank Balance</a></td>
+                    <td><a href = '{{url_for('getBringHomePay')}}'>Bring Home Pay</a></td>
+                </table>
+            </div>
     </body>
 </html>

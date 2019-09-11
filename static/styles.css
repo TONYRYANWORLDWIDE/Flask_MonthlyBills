@@ -1,8 +1,6 @@
 #tblMonthlyBills{
     border-collapse: collapse;
 
-
-
 }
 table{
     width: 100%;
@@ -88,10 +86,6 @@ a.new {
     text-align: center;
 }
 
-
-
-
-
 .description {
     font-size: .85 em;  
     padding-left: 5px; 
@@ -107,7 +101,6 @@ a.new {
 }
 .alter{
     float: right;
-
     padding-top: 10px;
     padding-right: 5px;
 }
