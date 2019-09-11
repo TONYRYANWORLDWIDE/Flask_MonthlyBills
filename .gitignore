@@ -5,3 +5,5 @@ __pycache__
 *.db
 *.json
 *.txt
+linux database setup.ipynb
+.ipynb_checkpoints/linux database setup-checkpoint.ipynb
