@@ -68,7 +68,7 @@ a.new {
 }
 
 .pane {
-    position: absolute;
+    /* position: absolute; */
     left: 29%;
     right: 29%;
     border: 3px solid;
