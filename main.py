@@ -1,19 +1,17 @@
+from API import monthlyBillJSON 
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-app = Flask(__name__)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base , MonthlyBill, WeeklyBill,BringHome,BankBalance , MonthlyBills
-import datetime
+
+
+app = Flask(__name__)
 
 mb = MonthlyBills()
 engine = mb.connect()
-# engine = create_engine('sqlite:///TRBills.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
-
-
-
 
 @app.route('/BringHome/')
 def getBringHomePay():
@@ -113,6 +111,8 @@ def getMonthlyBills():
     bills = session.query(MonthlyBill).all()
     return render_template('monthlyBills.html', bills=bills)
 
+
+
 @app.route('/MonthlyBill/new',methods=['GET','POST'])
 def newMonthlyBills():
     if request.method == 'POST':
@@ -203,7 +203,22 @@ def deleteWeeklyBills(mbid):
     else:    
         return render_template('deleteWeeklyBill.html', mbid = mbid, item = deleteBill)
 
+
+@app.route('/MonthlyBill/JSON')
+def monthlyBillJSON():
+    if request.method == 'GET':
+        monthlybills = session.query(MonthlyBill).all()
+        return jsonify(MonthlyBills=[i.serialize for i in monthlybills])
+
+@app.route('/MonthlyBill/JSON/<int:id>')
+def monthlyBillJSON_ID(id):
+    if request.method == 'GET':
+        bill = session.query(MonthlyBill).filter_by(id = id).one()
+        return jsonify(MonthlyBills = bill.serialize)
+
+
 if __name__ == '__main__':  # ensure function only runs if executed from the python interpreter
     app.secret_key = 'super_secret_key2'
     app.debug = True        # server will reload itself whenever a change is made
+    app.config.from_object('configurations.DevelopmentConfig')
     app.run(host = '0.0.0.0' , port = 5000)

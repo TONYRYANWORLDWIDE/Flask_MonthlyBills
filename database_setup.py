@@ -30,7 +30,6 @@ class MonthlyBills():
         conn = None
         try:
             params = self.config()
-            print(params)
             conn = psycopg2.connect(**params)
             enginestart = 'postgresql+psycopg2://' + params['user'] + ':' + params['password'] + '@' + params['host']  + ':5432/' + params['database']
             engine = create_engine(enginestart)
@@ -45,6 +44,16 @@ class MonthlyBill(Base):
     cost = Column(Float)
     date = Column(String(2))
     UserID = Column(String(128))
+
+    @property
+    def serialize(self):
+        return {
+            'id' : self.id,
+            'bill' : self.bill,
+            'cost' : self.cost,
+            'date' : self.date,
+            'UserID' : self.UserID,
+        }
     
 class WeeklyBill(Base):
     __tablename__ = 'weeklyBills'
@@ -69,6 +78,8 @@ class BankBalance(Base):
     balance = Column(Float, nullable = False)
     date = Column(DateTime)
     UserID = Column(String(128), nullable = False)
+
+    
 
 if __name__ == '__main__':    
     mb = MonthlyBills()

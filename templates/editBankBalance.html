@@ -8,6 +8,7 @@
             <p>bill:</p>
             <input type = 'text' size = '30' name = 'balance', placeholder = {{item.balance}}>
             <input type = 'submit' value = 'Edit'>
+            <a href = "{{ url_for('getBankBalance')}}"> Cancel </a>
         </form>
     </body>
 </html>
